@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+
+<!--    <bean id="orderService" name="orderServiceBean" class="aman.example.xmlconfigdemo.OrderService" />-->
+<!--     bean me id hamesha camelCase me dena -->
+
+<!--    <bean id="orderService2" class="aman.example.xmlconfigdemo.OrderService" />-->
+
+<!--    <bean id="paymentService" name="paymentServiceBean" class="aman.example.xmlconfigdemo.payment.PaymentService" />-->
+
+
+<!--    dependency injection start-->
+<!--    <bean id="paymentService" name="paymentServiceBean" class="aman.example.xmlconfigdemo.payment.PaymentService" />-->
+
+<!--    <bean id="paymentService" name="paymentServiceBean" class="aman.example.xmlconfigdemo.payment.PaymentService" >-->
+<!--        <constructor-arg value="UPI"/>-->
+<!--        <constructor-arg value="4"/>-->
+
+<!--        ab ye index ke hisab se execute karayega-->
+<!--        <constructor-arg index="0" value="UPI"/>-->
+<!--        <constructor-arg index="1" value="4"/>-->
+
+<!--        name se bhi kar skte h-->
+<!--        <constructor-arg name="type" value="UPI"/>-->
+<!--        <constructor-arg name="count" value="4"/>-->
+
+<!--    </bean>-->
+
+
+<!--    <bean id="orderService" class="aman.example.xmlconfigdemo.OrderService">-->
+<!--        <constructor-arg ref="paymentService"/>-->
+
+<!--    ab setter injection ke through-->
+<!--    <bean id="orderService" class="aman.example.xmlconfigdemo.OrderService">-->
+<!--       <property name="paymentService" ref="paymentService"/>-->
+<!--        name basically setter ka hi name leta h wo by default "set" laga hi leta h-->
+<!--        aur reference me basially kiska reference chahiye jaise hame paymentService ka chahiye tha-->
+<!--    </bean>-->
+
+<!--    <bean id="cardPayment" class="aman.example.xmlconfigdemo.payment.CardPayment" />-->
+<!--      <bean id="upiPayment" class="aman.example.xmlconfigdemo.payment.UPIPayment" />-->
+
+<!--    <bean id="orderService" class="aman.example.xmlconfigdemo.OrderService">-->
+<!--        <constructor-arg ref="cardPayment"/>-->
+<!--        yha jo reference doge usse payment hogi -->
+<!--    </bean>-->
+
+<!--    <bean id="userService" class="aman.example.xmlconfigdemo.UserService">-->
+<!--        <constructor-arg value="aman"/>-->
+<!--    </bean>-->
+<!--ab scope prototype ho gya h to jab tk me main me iska object nhi bana deta tab tak o/p nhi milega-->
+
+
+<!--    agar list ho to-->
+<!--    <bean id="userService" class="aman.example.xmlconfigdemo.UserService">-->
+<!--        <constructor-arg >-->
+<!--            <list>-->
+<!--                <value>Aniket</value>-->
+<!--                <value>Rohan</value>-->
+<!--                <value>Abhinav</value>-->
+<!--                <value>Ritik</value>-->
+<!--                <value>Anamika</value>-->
+<!--                <value>Riya</value>-->
+<!--            </list>-->
+<!--        </constructor-arg>-->
+<!--    </bean>-->
+
+
+
+<!--    pre post destroy-->
+<bean id="userService" class="aman.example.xmlconfigdemo.UserService"
+      init-method="init"
+       destroy-method="destroy"
+     scope="prototype"/>
+<!--    scope prototype laga dunga to destroy method call nhi hoga       -->
+
+</beans>
