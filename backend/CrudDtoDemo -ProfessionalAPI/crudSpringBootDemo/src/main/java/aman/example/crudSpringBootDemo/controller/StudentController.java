@@ -1,0 +1,80 @@
+package aman.example.crudSpringBootDemo.controller;
+
+import aman.example.crudSpringBootDemo.dto.CreateStudentRequestDto;
+import aman.example.crudSpringBootDemo.dto.CreateStudentResponseDto;
+import aman.example.crudSpringBootDemo.dto.UpdateStudentRequestDto;
+import aman.example.crudSpringBootDemo.dto.UpdateStudentResponseDto;
+import aman.example.crudSpringBootDemo.entity.Student;
+import aman.example.crudSpringBootDemo.service.StudentService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+//@Controller // ye bhi likh skte the aur RestController bhi wo spring ko batata h ki ye ek RestController h jo request accept karta h aur response print karta h
+@RestController()
+@RequestMapping("/api/student")
+public class StudentController {
+  private StudentService studentService;
+
+  public StudentController(StudentService studentService) {
+    this.studentService = studentService;
+  }
+
+    // ******* POST (create data) ******
+
+
+    @PostMapping
+
+    public ResponseEntity<CreateStudentResponseDto> createStudent(
+            @Valid  @RequestBody CreateStudentRequestDto createStudentRequestDto){    // *** to yha @RequestBody batata h ki body json format me milegi aur phir Student use jackson(simple object) format me convert kar dega
+       // ** ye @Valid hi sare validation @NotBlank, @NotNull etc inko enable karta h
+        CreateStudentResponseDto createStudent = studentService.createStudent(createStudentRequestDto);
+        return ResponseEntity
+                .status(HttpStatus.CREATED) // ab ye created yani status code (201) jo ki sahi bhi h kyunki new thing create ki h
+                .body(createStudent);
+    }
+
+
+
+    @GetMapping("/{id}")
+     public ResponseEntity<CreateStudentResponseDto> getStudent(@PathVariable Long id){ // PathVariable kyunki ek path require tha
+        CreateStudentResponseDto studentRes = studentService.getStudent(id);
+//        if (studentRes == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+        return ResponseEntity.ok(studentRes);
+
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CreateStudentResponseDto>> getAllStudent(){
+        List<CreateStudentResponseDto> studentList = studentService.getAllStudent();
+//        if (studentList.isEmpty()) {
+//            return ResponseEntity.notFound().build();
+//        }
+        return ResponseEntity.ok(studentList);
+
+    }
+
+    @PutMapping
+               public ResponseEntity<UpdateStudentResponseDto> updateStudent(@PathVariable Long id, @RequestBody UpdateStudentRequestDto studentReq){
+          UpdateStudentResponseDto studentRes = studentService.updateStudent(id,studentReq);
+//          if (studentRes == null) {
+//                return ResponseEntity.notFound().build();
+//          }
+          return ResponseEntity.ok(studentRes);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteStudent(@PathVariable Long id){
+//        boolean deleteRes = studentService.deleteStudent(id);
+//        if (!deleteRes) {
+//            return ResponseEntity.notFound().build();
+//        }
+        studentService.deleteStudent(id);
+        return ResponseEntity.noContent().build();
+    }
+}
