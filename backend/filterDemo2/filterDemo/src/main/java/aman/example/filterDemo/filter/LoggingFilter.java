@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.UUID;
 
-@Component
+//@Component
 @Order(2)
 public class LoggingFilter implements Filter {
     @Override
@@ -21,7 +21,7 @@ public class LoggingFilter implements Filter {
 
         String requestId = UUID.randomUUID().toString();
         httpResponse.setHeader("X-Request-Id", requestId); /* isko yha karne ka reason h kyunki
-        response aane ke bad wo only read only rhta h isliye
+        response aane ke bad wo commit ho jata h to usme change nhi ho skta h isliye
          apan pehle hi jab request aati h tab hamare pass HttpServletResponse
          ka object rhta h to usme hi uska object add kar dete h
          */

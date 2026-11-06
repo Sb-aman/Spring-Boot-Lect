@@ -1,6 +1,7 @@
 package aman.example.filterDemo.service;
 
 import aman.example.filterDemo.dto.Student;
+import aman.example.filterDemo.dto.StudentResponseDto;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,11 +12,15 @@ public class StudentService {
         this.student = student;
     }
 
-    public void createStudent( Student student) {
+    public StudentResponseDto createStudent(Student student) {
         System.out.println("student created");
-        System.out.println("student Id : " + student.getId());
-        System.out.println("student name: " + student.getName());
-        System.out.println("student email: " + student.getEmail());
+//        System.out.println("student Id : " + student.getId());
+//        System.out.println("student name: " + student.getName());
+//        System.out.println("student email: " + student.getEmail());
+        StudentResponseDto studentResponseDto = new StudentResponseDto();
+        studentResponseDto.setName(student.getName());
+        studentResponseDto.setMessage("Student is saved successfully");
+        return studentResponseDto;
 
         /*
         try {
@@ -25,5 +30,6 @@ public class StudentService {
             e.printStackTrace();
         }
                  */
+
     }
 }

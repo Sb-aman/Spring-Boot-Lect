@@ -1,6 +1,7 @@
 package aman.example.filterDemo.controller;
 
 import aman.example.filterDemo.dto.Student;
+import aman.example.filterDemo.dto.StudentResponseDto;
 import aman.example.filterDemo.service.StudentService;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createStudent(@RequestBody Student student) {
-        studentService.createStudent(student);
-        return ResponseEntity.ok("done");
+    public ResponseEntity<StudentResponseDto> createStudent(@RequestBody Student student) {
+        StudentResponseDto studentResponse = studentService.createStudent(student);
+        return ResponseEntity.ok(studentResponse);
     }
 }
